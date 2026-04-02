@@ -23,11 +23,8 @@ export function Snackbar({
   duration = 8000,
 }: SnackbarProps) {
   const [remaining, setRemaining] = useState(duration);
-  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    if (!visible) return;
-
     const interval = setInterval(() => {
       setRemaining((prev) => {
         if (prev <= 100) {
