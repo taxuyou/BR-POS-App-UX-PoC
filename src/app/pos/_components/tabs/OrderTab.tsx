@@ -117,6 +117,7 @@ function Step1HqInstruction({ onNext }: { onNext: () => void }) {
       <button
         onClick={onNext}
         className="
+          btn-shimmer
           w-full h-12 bg-primary text-white rounded-xl
           flex items-center justify-center gap-2
           text-sm font-semibold
@@ -200,6 +201,7 @@ function Step2AiReview({ onPrev, onNext }: { onPrev: () => void; onNext: () => v
         <button
           onClick={onNext}
           className="
+            btn-shimmer
             flex-1 h-12 bg-primary text-white rounded-xl
             flex items-center justify-center gap-2
             text-sm font-semibold
@@ -282,6 +284,7 @@ function Step3FinalConfirm({
         <button
           onClick={onConfirm}
           className="
+            btn-shimmer
             flex-1 h-12 bg-primary text-white rounded-xl
             flex items-center justify-center gap-2
             text-sm font-semibold

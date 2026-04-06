@@ -100,6 +100,7 @@ function InventoryItemCard({
           <button
             onClick={() => onRegister(item.id)}
             className="
+              btn-shimmer
               shrink-0 h-8 px-3 bg-primary text-white text-xs font-semibold rounded-lg
               hover:bg-[#1a1a1a] active:bg-[#2a2a2a] active:scale-[0.97]
               focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1

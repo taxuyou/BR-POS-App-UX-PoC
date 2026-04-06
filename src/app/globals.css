@@ -173,3 +173,34 @@ body {
 .snackbar-enter {
   animation: snackbar-in 0.2s ease-out forwards;
 }
+
+/* ============================================================
+   버튼 Shimmer — 행동 심리학 CTA 강조
+   빛이 좌→우로 쓸어가며 "누르고 싶다"는 충동 유발
+   (Variable Reward + Attentional Capture 원리)
+   ============================================================ */
+@keyframes btn-shimmer {
+  0%   { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(300%) skewX(-20deg); }
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 35%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.30) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  animation: btn-shimmer 2.2s ease-in-out infinite;
+  pointer-events: none;
+}

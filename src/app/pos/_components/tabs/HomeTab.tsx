@@ -66,6 +66,7 @@ function UrgentSection({ onNavigate }: { onNavigate: (tab: PosTab) => void }) {
             <button
               onClick={() => onNavigate("inventory")}
               className="
+                btn-shimmer
                 shrink-0 h-8 px-3 flex items-center gap-1.5
                 bg-primary text-white text-xs font-semibold rounded-lg
                 hover:bg-[#1a1a1a] active:bg-[#2a2a2a] active:scale-[0.97]

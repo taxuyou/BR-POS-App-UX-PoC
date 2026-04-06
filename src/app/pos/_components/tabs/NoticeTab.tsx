@@ -175,6 +175,7 @@ function NoticeCard({
               <button
                 onClick={() => onReadToggle(notice.id)}
                 className="
+                  btn-shimmer
                   h-8 px-3 flex items-center gap-1.5 rounded-lg
                   bg-primary text-white text-xs font-semibold
                   hover:bg-[#1a1a1a] active:scale-[0.97]
