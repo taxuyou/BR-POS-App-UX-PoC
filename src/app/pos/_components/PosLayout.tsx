@@ -148,10 +148,19 @@ function PosHeader({ onReturn }: { onReturn: () => void }) {
 const BANNER_KEY = "pos-info-banner-dismissed";
 
 function PosInfoBanner() {
-  /* lazy initializer — SSR 안전: typeof window 체크 후 localStorage 읽기 */
-  const [visible, setVisible] = useState<boolean>(
-    () => typeof window !== "undefined" && !localStorage.getItem(BANNER_KEY)
-  );
+  /*
+   * SSR에서 localStorage 접근 불가 → 초기값 false(배너 숨김)로 시작
+   * 마운트 후 useEffect에서 localStorage 확인 후 표시 결정
+   * - 서버: false, 클라이언트 초기: false → Hydration 불일치 없음
+   * - 마운트 후: localStorage 없으면 true로 전환 (외부 시스템 동기화 목적)
+   */
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // localStorage는 외부 시스템 — 마운트 후 동기화가 올바른 패턴
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!localStorage.getItem(BANNER_KEY)) setVisible(true);
+  }, []);
 
   const dismiss = () => {
     localStorage.setItem(BANNER_KEY, "true");
