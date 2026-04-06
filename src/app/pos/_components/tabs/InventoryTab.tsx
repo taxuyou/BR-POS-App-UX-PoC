@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Info, ChevronDown, ChevronUp, ChevronRight } from "lucide-react";
+import { Info, CaretDown, CaretUp, CaretRight } from "@phosphor-icons/react";
 import { Snackbar } from "@/shared/ui/Snackbar";
 import {
   mockInventoryItems,
@@ -101,7 +101,7 @@ function InventoryItemCard({
               </span>
             </div>
             <div className="flex items-center gap-1 text-secondary">
-              <Info size={11} className="shrink-0" />
+              <Info size={11} weight="regular" className="shrink-0" />
               <p className="text-xs">{item.aiReason}</p>
             </div>
           </div>
@@ -126,7 +126,7 @@ function InventoryItemCard({
         <div className="flex items-center gap-2 text-sm mb-2">
           <span className="text-secondary text-xs">현재 재고</span>
           <span className="font-bold text-primary tabular-nums">{item.currentStock}{item.unit}</span>
-          <ChevronRight size={12} className="text-tertiary" />
+          <CaretRight size={12} weight="regular" className="text-tertiary" />
           <span className="text-secondary text-xs">권장 생산</span>
           <span className={`font-black tabular-nums ${item.status !== "normal" ? "text-primary" : "text-secondary"}`}>
             {item.recommendedProduction}{item.unit}
@@ -218,7 +218,7 @@ export function InventoryTab() {
         >
           <div className="flex items-center gap-1.5 mb-1">
             <p className="text-xs text-secondary flex-1">산출 근거</p>
-            {showEvidence ? <ChevronUp size={13} className="text-secondary" /> : <ChevronDown size={13} className="text-secondary" />}
+            {showEvidence ? <CaretUp size={13} weight="regular" className="text-secondary" /> : <CaretDown size={13} weight="regular" className="text-secondary" />}
           </div>
           <p className="text-sm font-bold text-primary">역추정 공식</p>
         </button>

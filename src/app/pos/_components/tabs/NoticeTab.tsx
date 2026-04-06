@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp, X, ThumbsUp, FileText } from "lucide-react";
+import { CaretDown, CaretUp, X, ThumbsUp, FileText } from "@phosphor-icons/react";
 import {
   urgentNotices,
   cautionNotices,
@@ -51,7 +51,7 @@ function OriginalModal({ notice, onClose }: { notice: PosNoticeItem; onClose: ()
             onClick={onClose}
             className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface transition-colors shrink-0"
           >
-            <X size={16} className="text-secondary" />
+            <X size={16} weight="regular" className="text-secondary" />
           </button>
         </div>
 
@@ -120,7 +120,7 @@ function NoticeCard({
             </div>
             <p className={`text-sm font-bold ${isRead ? "text-secondary" : "text-primary"}`}>{notice.title}</p>
           </div>
-          {open ? <ChevronUp size={15} className="text-secondary shrink-0" /> : <ChevronDown size={15} className="text-secondary shrink-0" />}
+          {open ? <CaretUp size={15} weight="regular" className="text-secondary shrink-0" /> : <CaretDown size={15} weight="regular" className="text-secondary shrink-0" />}
         </button>
 
         {/* 펼침 콘텐츠 */}
@@ -147,7 +147,7 @@ function NoticeCard({
                   transition-all
                 "
               >
-                <ThumbsUp size={11} />
+                <ThumbsUp size={11} weight="regular" />
                 {isRead ? "확인 취소" : "확인 완료"}
               </button>
               <button
@@ -160,7 +160,7 @@ function NoticeCard({
                   transition-all
                 "
               >
-                <FileText size={11} />
+                <FileText size={11} weight="regular" />
                 원문 보기
               </button>
             </div>

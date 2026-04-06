@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Shield, ChevronRight, Check, Zap, RotateCcw, Home } from "lucide-react";
+import { Shield, CaretRight, Check, Lightning, ArrowCounterClockwise, House } from "@phosphor-icons/react";
 import { Stepper } from "@/shared/ui/Stepper";
 import { mockHqOrderItems, mockAiOrderItems, mockFinalOrderItems } from "@/entities/mock/pos-data";
 import type { OrderStep, FinalOrderItem, PosTab } from "@/shared/types/pos";
@@ -31,7 +31,7 @@ function OrderStepper({ currentStep }: { currentStep: 1 | 2 | 3 }) {
                     : isActive ? "bg-primary text-white ring-4 ring-primary/15"
                     : "bg-[#f0f1f3] text-tertiary"}
                 `}>
-                  {isDone ? <Check size={14} /> : stepNum}
+                  {isDone ? <Check size={14} weight="bold" /> : stepNum}
                 </div>
                 <div className="text-center">
                   <p className={`text-[10px] font-semibold leading-tight ${isActive ? "text-primary" : isDone ? "text-secondary" : "text-tertiary"}`}>
@@ -68,7 +68,7 @@ function Step1HqInstruction({ onNext }: { onNext: () => void }) {
         <div className="px-4 py-3 border-b border-border/60 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-lg bg-surface flex items-center justify-center">
-              <Shield size={13} className="text-secondary" />
+              <Shield size={13} weight="regular" className="text-secondary" />
             </div>
             <span className="text-sm font-bold text-primary">본사 발주 지시 — 7월 3주차</span>
           </div>
@@ -105,7 +105,7 @@ function Step1HqInstruction({ onNext }: { onNext: () => void }) {
         "
       >
         확인 — AI 분석으로 넘기기
-        <ChevronRight size={16} />
+        <CaretRight size={16} weight="regular" />
       </button>
     </div>
   );
@@ -124,7 +124,7 @@ function Step2AiReview({ onPrev, onNext }: { onPrev: () => void; onNext: () => v
         <div className="px-4 py-3 border-b border-border/60 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-lg bg-surface flex items-center justify-center">
-              <Shield size={13} className="text-secondary" />
+              <Shield size={13} weight="regular" className="text-secondary" />
             </div>
             <span className="text-sm font-bold text-primary">분석 결과</span>
           </div>
@@ -185,7 +185,7 @@ function Step2AiReview({ onPrev, onNext }: { onPrev: () => void; onNext: () => v
           "
         >
           AI 추천 수량으로 최종 확인
-          <ChevronRight size={16} />
+          <CaretRight size={16} weight="regular" />
         </button>
       </div>
     </div>
@@ -263,7 +263,7 @@ function Step3FinalConfirm({
             transition-all
           "
         >
-          <Zap size={15} />
+          <Lightning size={15} weight="fill" />
           발주 최종 확정 전송
         </button>
       </div>
@@ -282,7 +282,7 @@ function OrderComplete({ onRestart, onHome }: { onRestart: () => void; onHome: (
   return (
     <div className="card p-12 flex flex-col items-center gap-4">
       <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center">
-        <Check size={32} className="text-success" strokeWidth={2.5} />
+        <Check size={32} weight="bold" className="text-success" strokeWidth={2.5} />
       </div>
       <div className="text-center">
         <p className="text-xl font-black text-primary">발주 확정 완료</p>
@@ -299,7 +299,7 @@ function OrderComplete({ onRestart, onHome }: { onRestart: () => void; onHome: (
             transition-all
           "
         >
-          <Home size={14} />
+          <House size={14} weight="regular" />
           홈으로
         </button>
         <button
@@ -312,7 +312,7 @@ function OrderComplete({ onRestart, onHome }: { onRestart: () => void; onHome: (
             transition-all
           "
         >
-          <RotateCcw size={13} />
+          <ArrowCounterClockwise size={13} weight="regular" />
           새 발주 시작
         </button>
       </div>
