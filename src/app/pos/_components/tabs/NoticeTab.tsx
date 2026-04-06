@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, ChevronDown, ChevronUp, X, ThumbsUp, FileText } from "lucide-react";
+import { ChevronDown, ChevronUp, X, ThumbsUp, FileText } from "lucide-react";
 import {
   urgentNotices,
   cautionNotices,
@@ -129,12 +129,9 @@ function NoticeCard({
             <p className="text-sm text-secondary leading-relaxed mt-3">{notice.body}</p>
 
             {notice.requiredAction && (
-              <div className="mt-3 flex items-start gap-1.5">
-                <Sparkles size={11} className="text-secondary shrink-0 mt-0.5" />
-                <p className="text-sm text-secondary">
-                  <span className="font-bold text-primary">필요 조치:</span>{" "}
-                  {notice.requiredAction}
-                </p>
+              <div className="mt-3 p-3 bg-[#f8f8f8] rounded-lg border border-border/50">
+                <p className="text-xs font-semibold text-primary mb-0.5">필요 조치</p>
+                <p className="text-sm text-secondary">{notice.requiredAction}</p>
               </div>
             )}
 
@@ -198,13 +195,9 @@ export function NoticeTab() {
 
   return (
     <div className="p-6 space-y-4">
-      <div className="flex items-center gap-2">
-        <h2 className="text-base font-black text-primary">AI 공지 요약</h2>
-        <span className="inline-flex items-center gap-1 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-          <Sparkles size={9} />
-          에이전트 C
-        </span>
-        <span className="text-xs text-secondary ml-1">하루 10건+ → 3건으로 압축</span>
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-bold text-primary">공지·알림</h2>
+        <span className="text-xs text-secondary">우선순위 자동 분류</span>
       </div>
 
       {/* 요약 인포바 */}

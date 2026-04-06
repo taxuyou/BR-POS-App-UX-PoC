@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, Info, ChevronDown, ChevronUp, ChevronRight } from "lucide-react";
+import { Info, ChevronDown, ChevronUp, ChevronRight } from "lucide-react";
 import { Snackbar } from "@/shared/ui/Snackbar";
 import {
   mockInventoryItems,
@@ -186,19 +186,15 @@ export function InventoryTab() {
   return (
     <div className="p-6 space-y-4">
       {/* 페이지 헤더 */}
-      <div className="flex items-center gap-2">
-        <h2 className="text-base font-black text-primary">생산 관리</h2>
-        <span className="inline-flex items-center gap-1 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-          <Sparkles size={9} />
-          에이전트 A
-        </span>
-        <span className="text-xs text-secondary ml-1">기회손실 역추정 기반 생산 관리</span>
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-bold text-primary">생산 관리</h2>
+        <span className="text-xs text-secondary">기회손실 역추정 기반</span>
       </div>
 
       {/* 상단 3개 요약 카드 */}
       <div className="grid grid-cols-3 gap-3">
         {/* 기회손실 합산 */}
-        <div className={`card p-4 ${currentChanceLoss > 0 ? "metric-top-orange" : ""}`}>
+        <div className={`card p-4 ${currentChanceLoss > 0 ? "ring-1 ring-[#FF671F]/20" : ""}`}>
           <p className="text-xs text-secondary mb-1">현재 기회손실 추정</p>
           <p className={`text-2xl font-black tabular-nums leading-none ${currentChanceLoss > 0 ? "text-[#FF671F]" : "text-primary"}`}>
             {currentChanceLoss > 0 ? `₩${(currentChanceLoss / 10000).toFixed(1)}만` : "₩0"}
@@ -207,22 +203,21 @@ export function InventoryTab() {
         </div>
 
         {/* 즉시 생산 필요 */}
-        <div className={`card p-4 ${currentUrgentCount > 0 ? "metric-top-black" : ""}`}>
+        <div className="card p-4">
           <p className="text-xs text-secondary mb-1">즉시 생산 필요</p>
           <p className="text-2xl font-black text-primary tabular-nums leading-none">
             {currentUrgentCount > 0 ? `${currentUrgentCount}개 품목` : "없음"}
           </p>
-          <p className="text-xs text-secondary mt-1.5">에이전트 A 감지</p>
+          <p className="text-xs text-secondary mt-1.5">자동 감지</p>
         </div>
 
-        {/* AI 근거 토글 */}
+        {/* 근거 토글 */}
         <button
           onClick={() => setShowEvidence((v) => !v)}
           className="card card-hover p-4 text-left focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1 transition-all"
         >
           <div className="flex items-center gap-1.5 mb-1">
-            <Sparkles size={12} className="text-secondary" />
-            <p className="text-xs text-secondary flex-1">AI 근거 보기</p>
+            <p className="text-xs text-secondary flex-1">산출 근거</p>
             {showEvidence ? <ChevronUp size={13} className="text-secondary" /> : <ChevronDown size={13} className="text-secondary" />}
           </div>
           <p className="text-sm font-bold text-primary">역추정 공식</p>

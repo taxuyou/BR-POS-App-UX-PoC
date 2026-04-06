@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, Shield, ChevronRight, Check, Zap, RotateCcw, Home } from "lucide-react";
+import { Shield, ChevronRight, Check, Zap, RotateCcw, Home } from "lucide-react";
 import { Stepper } from "@/shared/ui/Stepper";
 import { mockHqOrderItems, mockAiOrderItems, mockFinalOrderItems } from "@/entities/mock/pos-data";
 import type { OrderStep, FinalOrderItem, PosTab } from "@/shared/types/pos";
@@ -123,10 +123,10 @@ function Step2AiReview({ onPrev, onNext }: { onPrev: () => void; onNext: () => v
       <div className="card overflow-hidden">
         <div className="px-4 py-3 border-b border-border/60 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-primary/8 flex items-center justify-center">
-              <Sparkles size={13} className="text-primary" />
+            <div className="w-6 h-6 rounded-lg bg-surface flex items-center justify-center">
+              <Shield size={13} className="text-secondary" />
             </div>
-            <span className="text-sm font-bold text-primary">AI 분석 결과 — 에이전트 B</span>
+            <span className="text-sm font-bold text-primary">분석 결과</span>
           </div>
           <span className="text-xs text-tertiary">과거 판매 패턴 + 기회손실 반영</span>
         </div>
@@ -347,13 +347,9 @@ export function OrderTab({ onNavigate }: OrderTabProps) {
 
   return (
     <div className="p-6 space-y-4">
-      <div className="flex items-center gap-2">
-        <h2 className="text-base font-black text-primary">발주 관리</h2>
-        <span className="inline-flex items-center gap-1 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-          <Sparkles size={9} />
-          에이전트 B
-        </span>
-        <span className="text-xs text-secondary ml-1">3단계 승인 플로우</span>
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-bold text-primary">발주 관리</h2>
+        <span className="text-xs text-secondary">3단계 승인 플로우</span>
       </div>
 
       {step !== "complete" && <OrderStepper currentStep={step} />}

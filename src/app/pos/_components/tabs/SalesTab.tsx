@@ -1,6 +1,5 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
 import {
   mockSalesBriefing,
   mockHourlySales,
@@ -126,24 +125,15 @@ function SalesRankingList() {
 export function SalesTab() {
   return (
     <div className="p-6 space-y-4">
-      <div className="flex items-center gap-2">
-        <h2 className="text-base font-black text-primary">매출 분석</h2>
-        <span className="inline-flex items-center gap-1 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-          <Sparkles size={9} />
-          에이전트 C
-        </span>
-        <span className="text-xs text-secondary ml-1">AI 브리핑 + 기회손실 가시화</span>
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-bold text-primary">매출 분석</h2>
+        <span className="text-xs text-secondary">기회손실 가시화</span>
       </div>
 
-      {/* AI 매출 브리핑 */}
-      <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg, #0d0d0d 0%, #222 100%)" }}>
-        <div className="px-5 py-4">
-          <div className="flex items-center gap-2 mb-2.5">
-            <Sparkles size={12} className="text-white/50 shrink-0" />
-            <span className="text-[11px] font-semibold text-white/50 tracking-widest uppercase">AI 매출 브리핑</span>
-          </div>
-          <p className="text-sm text-white/80 leading-relaxed">{mockSalesBriefing}</p>
-        </div>
+      {/* 매출 브리핑 */}
+      <div className="card px-5 py-4 bg-[#f8f9fa]">
+        <p className="text-xs font-semibold text-tertiary mb-1.5 uppercase tracking-widest">브리핑</p>
+        <p className="text-sm text-secondary leading-relaxed">{mockSalesBriefing}</p>
       </div>
 
       {/* 3개 메트릭 카드 */}

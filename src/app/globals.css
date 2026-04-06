@@ -197,11 +197,6 @@ body {
 .accent-warning { border-left: 3px solid #FF671F; }
 .accent-info    { border-left: 3px solid #e8e8e8; }
 
-/* ============================================================
-   메트릭 카드 상단 color bar
-   ============================================================ */
-.metric-top-orange { border-top: 3px solid #FF671F; }
-.metric-top-black  { border-top: 3px solid #0a0a0a; }
 
 /* ============================================================
    버튼 Shimmer — 행동 심리학 CTA 강조
