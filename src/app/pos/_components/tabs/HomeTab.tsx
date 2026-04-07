@@ -1,6 +1,6 @@
 "use client";
 
-import { Warning, CaretRight, Package, Shield, ChartBar, TrendDown, Lightning } from "@phosphor-icons/react";
+import { Warning, CaretRight, Package, Shield, ChartBar, TrendDown, Lightning, Sparkle } from "@phosphor-icons/react";
 import type { Icon } from "@phosphor-icons/react";
 import {
   mockHomeBriefing,
@@ -111,36 +111,82 @@ export function HomeTab({ onNavigate }: HomeTabProps) {
   const dateStr = `${today.getMonth() + 1}월 ${today.getDate()}일 (${["일","월","화","수","목","금","토"][today.getDay()]})`;
 
   return (
-    <div className="p-6 space-y-5">
-      <section>
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-base font-bold text-primary">오늘의 브리핑</h2>
-          <span className="text-xs text-tertiary">{dateStr}</span>
-        </div>
-        <div className="card px-5 py-4 bg-[#f8f9fa]">
-          <p className="text-sm text-secondary leading-relaxed">{mockHomeBriefing}</p>
-        </div>
-      </section>
+    <div className="p-6 space-y-6">
+      {/* 응답형 메인 그리드 2:1 */}
+      <div className="grid grid-cols-3 gap-6">
+        
+        {/* 좌측 영역 (2/3): 오늘의 브리핑 및 조치 사항 */}
+        <div className="col-span-2 space-y-6">
+          <section>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-base font-bold text-primary">오늘의 브리핑</h2>
+              <span className="text-xs text-tertiary">{dateStr}</span>
+            </div>
+            <div className="card px-5 py-4 bg-white border-none shadow-sm">
+              <p className="text-sm text-secondary leading-relaxed font-medium">
+                {mockHomeBriefing}
+              </p>
+            </div>
+          </section>
 
-      <section className="grid grid-cols-4 gap-3">
-        <MetricCard label="오늘 매출" value="₩125만" sub="+12.2% vs 전일" trendUp Icon={ChartBar} />
-        <MetricCard label="기회손실 추정" value={`₩${(totalChanceLoss / 10000).toFixed(1)}만`} sub="즉시 개선 필요" highlight Icon={Warning} />
-        <MetricCard label="폐기 비용" value="₩34K" sub="-8% vs 전일" trendDown Icon={TrendDown} />
-        <MetricCard label="즉시 조치" value={`${urgentProductionCount}건`} sub="생산 부족 품목" Icon={Lightning} />
-      </section>
+          <section className="grid grid-cols-2 gap-3">
+            <MetricCard label="오늘 매출" value="₩125만" sub="+12.2% vs 전일" trendUp Icon={ChartBar} />
+            <MetricCard label="기회손실 추정" value={`₩${(totalChanceLoss / 10000).toFixed(1)}만`} sub="즉시 개선 필요" highlight Icon={Warning} />
+          </section>
 
-      <UrgentSection onNavigate={onNavigate} />
-
-      <section>
-        <p className="text-xs font-semibold text-tertiary mb-2.5 tracking-widest uppercase">바로 가기</p>
-        <div className="grid grid-cols-3 gap-3">
-          <QuickNavCard Icon={Package} label="생산 관리" sub="재고 역추정 기반"
-            badge={urgentProductionCount > 0 ? `${urgentProductionCount}건` : undefined}
-            onClick={() => onNavigate("inventory")} />
-          <QuickNavCard Icon={Shield} label="발주 관리" sub="3단계 승인 플로우" badge="대기 중" onClick={() => onNavigate("order")} />
-          <QuickNavCard Icon={ChartBar} label="매출 분석" sub="브리핑 보기" onClick={() => onNavigate("sales")} />
+          <UrgentSection onNavigate={onNavigate} />
         </div>
-      </section>
+
+        {/* 우측 영역 (1/3): 추천 액션 및 바로 가기 */}
+        <div className="col-span-1 space-y-6">
+          <section>
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkle size={16} weight="fill" className="text-primary" />
+              <h2 className="text-base font-bold text-primary">추천 액션</h2>
+            </div>
+            <div className="space-y-3">
+              <QuickNavCard 
+                Icon={Package} 
+                label="내일 생산 계획 수립" 
+                sub="매출 예측 기반 권장"
+                badge="추천"
+                onClick={() => onNavigate("inventory")} 
+              />
+              <QuickNavCard 
+                Icon={Shield} 
+                label="부족 자재 선발주" 
+                sub="우유, 파우더 외 3건" 
+                badge="긴급" 
+                onClick={() => onNavigate("order")} 
+              />
+              <QuickNavCard 
+                Icon={ChartBar} 
+                label="주간 매출 리포트 확인" 
+                sub="일요일 대비 분석" 
+                onClick={() => onNavigate("sales")} 
+              />
+            </div>
+          </section>
+
+          <section className="card p-5 bg-primary text-white overflow-hidden relative group cursor-pointer active:scale-[0.98] transition-all">
+            <div className="relative z-10">
+              <p className="text-[10px] font-bold text-white/60 mb-1 tracking-wider">AI INSIGHT</p>
+              <p className="text-sm font-bold leading-snug">
+                오후 2시경 아이스 아메리카노 <br/>
+                판매량이 급증할 것으로 예상됩니다.
+              </p>
+              <div className="mt-4 flex items-center gap-1 text-[10px] font-bold">
+                상세 분석 보기 <CaretRight size={10} weight="bold" />
+              </div>
+            </div>
+            <Sparkle 
+              size={120} 
+              weight="fill" 
+              className="absolute -right-8 -bottom-8 text-white/5 group-hover:rotate-12 transition-transform duration-500" 
+            />
+          </section>
+        </div>
+      </div>
     </div>
   );
 }

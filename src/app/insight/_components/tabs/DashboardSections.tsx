@@ -10,9 +10,10 @@ import { TrendUp, TrendDown } from "@phosphor-icons/react";
 import {
   mockProductionSummary,
   mockTodaySales,
+  mockAiNetSales,
   mockOpportunityLoss,
-  mockWasteCost,
-  mockUrgentCount,
+  mockUrgentActions,
+  mockCurrentIssues,
 } from "@/entities/mock/insight-data";
 
 // ============================================================
@@ -56,10 +57,12 @@ function KpiCard({ label, value, subLabel, trend, highlight = false }: KpiCardPr
 // ============================================================
 
 export function KpiSection() {
-  /* 만(원) / K 단위로 변환 */
-  const salesMan = Math.round(mockTodaySales / 10000);
-  const lossMan = Math.round(mockOpportunityLoss / 10000);
-  const wasteK = Math.round(mockWasteCost / 1000);
+  /* 단위 변환 */
+  const salesMan    = Math.round(mockTodaySales / 10000);
+  const netSalesMan = Math.round(mockAiNetSales / 10000);
+  const lossMan     = Math.round(mockOpportunityLoss / 10000);
+  /* 위험 알림: 긴급 조치 + 현재 이슈 urgent 합산 */
+  const alertCount  = mockUrgentActions.length + mockCurrentIssues.filter((i) => i.severity === "urgent").length;
 
   return (
     <section className="grid grid-cols-4 gap-3">
@@ -70,21 +73,22 @@ export function KpiSection() {
         trend="up"
       />
       <KpiCard
+        label="AI 실매출"
+        value={`₩${netSalesMan}만`}
+        subLabel="인건비·재료비·수수료 제외"
+        trend="up"
+      />
+      <KpiCard
         label="기회손실 추정"
         value={`₩${lossMan}만`}
         subLabel="즉시 개선 필요"
         highlight
       />
       <KpiCard
-        label="폐기 비용"
-        value={`₩${wasteK}K`}
-        subLabel="-8% vs 전일"
-        trend="down"
-      />
-      <KpiCard
-        label="즉시 조치"
-        value={`${mockUrgentCount}건`}
-        subLabel="생산 부족 품목"
+        label="위험 알림"
+        value={`${alertCount}건`}
+        subLabel="즉각 대응 필요"
+        highlight
       />
     </section>
   );

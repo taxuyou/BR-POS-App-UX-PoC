@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import {
   House, Package, Shield, ChartBar, Bell,
-  ArrowClockwise, X, CaretRight,
+  ArrowClockwise, X, CaretRight, Sparkle, ChatCircleDots
 } from "@phosphor-icons/react";
+import { AgentChatSidebar } from "./AgentChatSidebar";
 import type { Icon } from "@phosphor-icons/react";
 import type { PosTab } from "@/shared/types/pos";
 
@@ -98,7 +99,15 @@ function PosSidebar({
 // 상단 헤더
 // ============================================================
 
-function PosHeader({ onReturn }: { onReturn: () => void }) {
+function PosHeader({ 
+  onReturn, 
+  onToggleChat,
+  isChatOpen
+}: { 
+  onReturn: () => void; 
+  onToggleChat: () => void;
+  isChatOpen: boolean;
+}) {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
@@ -153,6 +162,23 @@ function PosHeader({ onReturn }: { onReturn: () => void }) {
         >
           ← 기존 POS
         </button>
+
+        <div className="w-px h-4 bg-border mx-1" />
+
+        <button
+          onClick={onToggleChat}
+          className={`
+            h-8 px-3 flex items-center gap-1.5 rounded-lg border transition-all
+            ${isChatOpen 
+              ? "bg-primary text-white border-primary shadow-sm" 
+              : "bg-white text-secondary border-border hover:bg-surface active:bg-border"
+            }
+            text-xs font-bold
+          `}
+        >
+          <ChatCircleDots size={14} weight={isChatOpen ? "fill" : "bold"} />
+          AI 챗봇
+        </button>
       </div>
     </header>
   );
@@ -206,19 +232,40 @@ interface PosLayoutProps {
 }
 
 export function PosLayout({ activeTab, onTabChange, children }: PosLayoutProps) {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   const handleReturn = () => {
     window.alert("기존 POS 화면으로 복귀합니다.\n(POC 데모: 실제 비알코리아 POS URL로 리다이렉트)");
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f0f1f3]">
-      <PosSidebar activeTab={activeTab} onTabChange={onTabChange} />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <PosHeader onReturn={handleReturn} />
-        <PosInfoBanner />
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+    <div className="flex h-screen overflow-hidden bg-[#f0f1f3] select-none">
+      {/* 1366x768 타겟팅 최상위 컨테이너 — 중앙 정렬 (선택 사항) */}
+      <div className="flex w-full h-full mx-auto max-w-[1920px]">
+        {/* 사이드바 */}
+        <PosSidebar activeTab={activeTab} onTabChange={onTabChange} />
+        
+        {/* 메인 콘텐츠 영역 */}
+        <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+          <PosHeader 
+            onReturn={handleReturn} 
+            onToggleChat={() => setIsChatOpen(!isChatOpen)}
+            isChatOpen={isChatOpen}
+          />
+          <PosInfoBanner />
+          <main className="flex-1 overflow-y-auto bg-[#f0f1f3]">
+            <div className="w-full max-w-[1366px] mx-auto min-h-full">
+              {children}
+            </div>
+          </main>
+        </div>
+
+        {/* AI 에이전트 챗봇 사이드바 — 블록 영역으로 구성 */}
+        {isChatOpen && (
+          <aside className="shrink-0 border-l border-border bg-white overflow-hidden flex flex-col h-full shadow-sm">
+            <AgentChatSidebar onClose={() => setIsChatOpen(false)} />
+          </aside>
+        )}
       </div>
     </div>
   );

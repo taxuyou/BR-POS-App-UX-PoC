@@ -20,6 +20,7 @@ import {
   ArrowSquareOut,
   Sparkle,
 } from "@phosphor-icons/react";
+
 import type { Icon } from "@phosphor-icons/react";
 import type { InsightTab } from "@/shared/types/insight";
 import { AiBriefingModal } from "./AiBriefingModal";

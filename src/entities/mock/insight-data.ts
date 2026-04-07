@@ -198,6 +198,8 @@ export const mockCategoryContribution: CategoryContribution[] = [
 
 /** 오늘 매출 (원) */
 export const mockTodaySales = 1250000;
+/** AI 실매출 — 인건비·재료비·배달 수수료 제외 순이익 추정 */
+export const mockAiNetSales = 780000;
 
 /** 기회손실 추정 (원) */
 export const mockOpportunityLoss = 187000;
