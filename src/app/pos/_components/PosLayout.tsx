@@ -28,13 +28,16 @@ const TABS: {
 // BR 로고 SVG
 // ============================================================
 
+/** 배스킨라빈스 공식 로고 — 핑크 외곽 링 + 흰 내부 + BR 컬러 */
 function BRLogo() {
   return (
-    <svg width="36" height="28" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0" y="0" width="5" height="28" rx="2" fill="#1E5FA8" />
-      <path d="M7 2h7.5c3.5 0 5.5 1.8 5.5 4.5 0 1.5-.7 2.7-1.8 3.4 1.6.7 2.6 2.1 2.6 3.9 0 3-2.2 4.8-5.8 4.8H7V2zm3 5.5h4c1.3 0 2-.6 2-1.8s-.7-1.7-2-1.7H10V7.5zm0 7.5h4.5c1.4 0 2.2-.7 2.2-2s-.8-2-2.2-2H10V15z" fill="#E91E8C" />
-      <path d="M22 2h7c3.8 0 6 1.9 6 5.2 0 2.3-1.2 4-3.2 4.8l3.5 6.6h-3.4l-3.1-6H25.2V18.6H22V2zm3.2 7.8h3.5c1.8 0 2.8-.9 2.8-2.4s-1-2.4-2.8-2.4h-3.5v4.8z" fill="#1E5FA8" />
-    </svg>
+    <img
+      src="/br-logo.png"
+      alt="Baskin Robbins"
+      width={40}
+      height={40}
+      style={{ objectFit: "contain" }}
+    />
   );
 }
 
@@ -52,10 +55,9 @@ function PosSidebar({
   return (
     <aside className="w-[68px] flex flex-col bg-[#0d0d0d] shrink-0 h-full">
       {/* 흰 배경 위에 로고 — 다크 사이드바에서 선명하게 */}
-      <div className="flex items-center justify-center pt-4 pb-3.5 border-b border-white/8">
-        <div className="bg-white rounded-xl px-2 py-1.5">
-          <BRLogo />
-        </div>
+      {/* 다크 사이드바 위 원형 로고 — 흰 배경 불필요 (원 자체가 흰 배경 포함) */}
+      <div className="flex items-center justify-center pt-3 pb-3 border-b border-white/8">
+        <BRLogo />
       </div>
 
       <nav className="flex-1 flex flex-col items-center pt-2 pb-2 gap-0.5">
